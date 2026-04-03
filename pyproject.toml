@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mirna-toolkit"
+version = "0.1.0"
+description = "Python-native end-to-end toolkit for miRNA analysis"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+  { name = "miRNA-Toolkit Contributors" }
+]
+keywords = ["mirna", "bioinformatics", "rna", "genomics", "small-rna"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+dependencies = [
+  "requests>=2.31",
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "networkx>=3.2",
+  "plotly>=5.20",
+  "matplotlib>=3.8",
+  "seaborn>=0.13"
+]
+
+[project.optional-dependencies]
+full = [
+  "pysam>=0.22",
+  "scikit-learn>=1.4",
+  "shap>=0.45",
+  "lime>=0.2.0.1"
+]
+dev = [
+  "build>=1.2",
+  "pytest>=8.0",
+  "pytest-cov>=5.0",
+  "ruff>=0.5",
+  "mypy>=1.10"
+]
+
+[project.scripts]
+mirna-toolkit = "mirna_toolkit.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 150
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]

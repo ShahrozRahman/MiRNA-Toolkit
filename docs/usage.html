@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>miRNA-Toolkit Production Usage</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --brand: #0f766e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 10px;
+      line-height: 1.25;
+    }
+
+    h1 { font-size: 1.8rem; }
+    h2 {
+      margin-top: 24px;
+      font-size: 1.2rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+
+    p { margin: 0 0 12px; color: var(--muted); }
+
+    .chip {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--brand);
+      border: 1px solid #99f6e4;
+      background: #f0fdfa;
+      border-radius: 999px;
+      padding: 2px 10px;
+      margin-bottom: 8px;
+    }
+
+    pre {
+      margin: 0;
+      padding: 12px;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 8px;
+      overflow-x: auto;
+      border: 1px solid #1e293b;
+      font-size: 0.9rem;
+    }
+
+    code { font-family: Consolas, monospace; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="chip">Production Guide</div>
+    <h1>miRNA-Toolkit Usage</h1>
+    <p>Install name: <code>mirna-toolkit</code> | Import name: <code>mirna_toolkit</code></p>
+
+    <h2>Install</h2>
+    <div class="card">
+      <pre><code>pip install mirna-toolkit</code></pre>
+    </div>
+
+    <h2>Python API</h2>
+    <div class="card">
+      <pre><code>from mirna_toolkit import alignment, quantification, prediction, disease, visualization
+
+bam_file = alignment.bowtie.align("sample.fastq", reference="mirbase.fa")
+counts = quantification.counts.from_bam(bam_file, annotation="mirbase.gtf")
+normalized = quantification.normalization.tpm(counts)
+
+targets = prediction.targetscan_api.get_targets("hsa-miR-21")
+assoc = disease.hmdd.get_associations("hsa-miR-21")
+
+fig = visualization.networks.plot_mirna_targets("hsa-miR-21", targets)
+fig.show()</code></pre>
+    </div>
+
+    <h2>CLI</h2>
+    <div class="card">
+      <pre><code>mirna-toolkit run --fastq sample.fastq --reference mirbase_index --annotation mirbase.gtf
+mirna-toolkit batch --manifest samples.csv --output-dir batch_runs
+mirna-toolkit help</code></pre>
+    </div>
+
+    <h2>Production Notes</h2>
+    <div class="card">
+      <p>Ensure external tools are installed and available on PATH when using wrapper-based steps:</p>
+      <p><code>fastqc</code>, <code>fastp</code>, <code>samtools</code>, <code>bowtie</code>, <code>hisat2</code>, <code>STAR</code></p>
+    </div>
+  </main>
+</body>
+</html>

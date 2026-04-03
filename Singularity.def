@@ -1,0 +1,20 @@
+Bootstrap: docker
+From: python:3.11-slim
+
+%post
+    pip install --upgrade pip
+
+%files
+    pyproject.toml /opt/mirna-toolkit/pyproject.toml
+    README.md /opt/mirna-toolkit/README.md
+    src /opt/mirna-toolkit/src
+
+%post
+    cd /opt/mirna-toolkit
+    pip install -e .
+
+%environment
+    export PYTHONUNBUFFERED=1
+
+%runscript
+    python -c "import mirna_toolkit; print(mirna_toolkit.__version__)"
