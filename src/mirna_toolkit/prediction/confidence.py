@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 def combine_prediction_scores(scores: dict[str, float], weights: dict[str, float] | None = None) -> float:
     """Combine heterogeneous prediction scores into a confidence metric in [0, 1]."""
     if not scores:
