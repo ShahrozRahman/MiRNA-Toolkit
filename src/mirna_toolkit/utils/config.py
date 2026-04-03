@@ -2,15 +2,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
 
 
 @dataclass
 class ToolkitConfig:
     threads: int = 4
     working_dir: Path = Path(".")
-    mirbase_version: Optional[str] = None
-    targetscan_release: Optional[str] = None
+    mirbase_version: str | None = None
+    targetscan_release: str | None = None
 
 
 def load_config(config_path: str | Path) -> ToolkitConfig:
