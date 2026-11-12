@@ -4,7 +4,7 @@ Use this checklist before publishing a new version of mirna-toolkit.
 
 ## 1. Prepare
 
-- [ ] Update version in pyproject.toml
+- [ ] Update the version in `src/mirna_toolkit/_version.py` and check that it is unused on PyPI
 - [ ] Update README.md and docs/usage.html if behavior changed
 - [ ] Confirm install name is mirna-toolkit and import name is mirna_toolkit
 
@@ -17,7 +17,7 @@ Use this checklist before publishing a new version of mirna-toolkit.
 
 ## 3. Publish
 
-- [ ] Create and push a release tag (for example, v0.1.1)
+- [ ] Create and push a release tag matching the package version (for example, v0.1.3)
 - [ ] Publish a GitHub Release (triggers publish workflow)
 - [ ] Confirm .github/workflows/publish-pypi.yml succeeds
 

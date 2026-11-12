@@ -7,7 +7,9 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-DEFAULT_USER_AGENT = "miRNA-Toolkit/0.1.0"
+from .._version import __version__
+
+DEFAULT_USER_AGENT = f"miRNA-Toolkit/{__version__}"
 
 
 def build_session(total_retries: int = 3, backoff_factor: float = 0.5) -> requests.Session:

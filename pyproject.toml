@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mirna-toolkit"
-version = "0.1.0"
+dynamic = ["version"]
 description = "Python-native end-to-end toolkit for miRNA analysis"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -53,6 +53,9 @@ mirna-toolkit = "mirna_toolkit.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+
+[tool.setuptools.dynamic]
+version = {attr = "mirna_toolkit._version.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
